@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.sys.SysLoginUserMapper">
+  <resultMap id="BaseResultMap" type="com.ly.po.SysLoginUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="login_user_name" jdbcType="VARCHAR" property="loginUserName" />
+    <result column="login_user_pass" jdbcType="VARCHAR" property="loginUserPass" />
+    <result column="login_type" jdbcType="VARCHAR" property="loginType" />
+    <result column="sys_user_id" jdbcType="INTEGER" property="sysUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, login_user_name, login_user_pass, login_type, sys_user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_login_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_login_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ly.po.SysLoginUser" useGeneratedKeys="true">
+    insert into sys_login_user (login_user_name, login_user_pass, login_type, 
+      sys_user_id)
+    values (#{loginUserName,jdbcType=VARCHAR}, #{loginUserPass,jdbcType=VARCHAR}, #{loginType,jdbcType=VARCHAR}, 
+      #{sysUserId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ly.po.SysLoginUser" useGeneratedKeys="true">
+    insert into sys_login_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loginUserName != null">
+        login_user_name,
+      </if>
+      <if test="loginUserPass != null">
+        login_user_pass,
+      </if>
+      <if test="loginType != null">
+        login_type,
+      </if>
+      <if test="sysUserId != null">
+        sys_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loginUserName != null">
+        #{loginUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginUserPass != null">
+        #{loginUserPass,jdbcType=VARCHAR},
+      </if>
+      <if test="loginType != null">
+        #{loginType,jdbcType=VARCHAR},
+      </if>
+      <if test="sysUserId != null">
+        #{sysUserId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ly.po.SysLoginUser">
+    update sys_login_user
+    <set>
+      <if test="loginUserName != null">
+        login_user_name = #{loginUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginUserPass != null">
+        login_user_pass = #{loginUserPass,jdbcType=VARCHAR},
+      </if>
+      <if test="loginType != null">
+        login_type = #{loginType,jdbcType=VARCHAR},
+      </if>
+      <if test="sysUserId != null">
+        sys_user_id = #{sysUserId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ly.po.SysLoginUser">
+    update sys_login_user
+    set login_user_name = #{loginUserName,jdbcType=VARCHAR},
+      login_user_pass = #{loginUserPass,jdbcType=VARCHAR},
+      login_type = #{loginType,jdbcType=VARCHAR},
+      sys_user_id = #{sysUserId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

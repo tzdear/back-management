@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.sys.SysTreeMapper">
+  <resultMap id="BaseResultMap" type="com.ly.po.SysTree">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ch_name" jdbcType="VARCHAR" property="chName" />
+    <result column="en_name" jdbcType="VARCHAR" property="enName" />
+    <result column="tree_url" jdbcType="VARCHAR" property="treeUrl" />
+    <result column="tree_order" jdbcType="VARCHAR" property="treeOrder" />
+    <result column="tree_type" jdbcType="VARCHAR" property="treeType" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="tree_no" jdbcType="INTEGER" property="treeNo" />
+    <result column="tree_icon" jdbcType="VARCHAR" property="treeIcon" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ch_name, en_name, tree_url, tree_order, tree_type, parent_id,tree_no, tree_icon
+  </sql>
+  <select id="selectTreeByRoleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select t.* from sys_tree t join sys_role_tree rt on t.id = rt.sys_tree_id 
+    where rt.sys_role_id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_tree
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectTreeByTreeNo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_tree
+    where tree_no = #{treeNo,jdbcType=INTEGER}
+  </select>
+  <select id="selectByTreeParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_tree
+    where parent_id = #{parentId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllTree" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_tree
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_tree
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ly.po.SysTree" useGeneratedKeys="true">
+    insert into sys_tree (ch_name, en_name, tree_url, 
+      tree_order, tree_type, parent_id, 
+      tree_no, tree_icon)
+    values (#{chName,jdbcType=VARCHAR}, #{enName,jdbcType=VARCHAR}, #{treeUrl,jdbcType=VARCHAR}, 
+      #{treeOrder,jdbcType=VARCHAR}, #{treeType,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{treeNo,jdbcType=INTEGER}, #{treeIcon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ly.po.SysTree" useGeneratedKeys="true">
+    insert into sys_tree
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chName != null">
+        ch_name,
+      </if>
+      <if test="enName != null">
+        en_name,
+      </if>
+      <if test="treeUrl != null">
+        tree_url,
+      </if>
+      <if test="treeOrder != null">
+        tree_order,
+      </if>
+      <if test="treeType != null">
+        tree_type,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="treeNo != null">
+        tree_no,
+      </if>
+      <if test="treeIcon != null">
+        tree_icon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chName != null">
+        #{chName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null">
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="treeUrl != null">
+        #{treeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="treeOrder != null">
+        #{treeOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="treeType != null">
+        #{treeType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="treeNo != null">
+        #{treeNo,jdbcType=INTEGER},
+      </if>
+      <if test="treeIcon != null">
+        #{treeIcon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ly.po.SysTree">
+    update sys_tree
+    <set>
+      <if test="chName != null">
+        ch_name = #{chName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null">
+        en_name = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="treeUrl != null">
+        tree_url = #{treeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="treeOrder != null">
+        tree_order = #{treeOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="treeType != null">
+        tree_type = #{treeType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="treeNo != null">
+        tree_no = #{treeNo,jdbcType=INTEGER},
+      </if>
+      <if test="treeIcon != null">
+        tree_icon = #{treeIcon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ly.po.SysTree">
+    update sys_tree
+    set ch_name = #{chName,jdbcType=VARCHAR},
+      en_name = #{enName,jdbcType=VARCHAR},
+      tree_url = #{treeUrl,jdbcType=VARCHAR},
+      tree_order = #{treeOrder,jdbcType=VARCHAR},
+      tree_type = #{treeType,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      tree_no = #{treeNo,jdbcType=INTEGER},
+      tree_icon = #{treeIcon,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

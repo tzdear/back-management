@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.sys.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.ly.po.SysRole">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, role_name
+  </sql>
+  <select id="selectRoleByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select r.* from sys_role r join sys_user_role ur on r.id = ur.sys_role
+     where ur.sys_user_id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectRoleBySysUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select c.* from sys_user a, sys_user_role b ,sys_role c where a.id = b.sys_user_id and b.sys_role = c.id and a.id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllRole" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+  </select>
+  <select id="ajaxTableRolePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    <where>
+    	<if test="roleId != null and roleId != ''">
+    		and id = ${roleId}
+    	</if>
+    	<if test="roleName != null and roleName != ''">
+    		and role_name = ${roleName}
+    	</if>
+    </where>
+    <if test="order != null and order != ''">
+    	<if test="orderDir != null and orderDir != ''">
+    		<if test="order == 0">
+    			order by id ${orderDir}
+    		</if>
+    		<if test="order == 1">
+    			order by role_name ${orderDir}
+    		</if>
+    	</if>
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ly.po.SysRole" useGeneratedKeys="true">
+    insert into sys_role (role_name)
+    values (#{roleName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ly.po.SysRole" useGeneratedKeys="true">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleName != null">
+        role_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ly.po.SysRole">
+    update sys_role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ly.po.SysRole">
+    update sys_role
+    set role_name = #{roleName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

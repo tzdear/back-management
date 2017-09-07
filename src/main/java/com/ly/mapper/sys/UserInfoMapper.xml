@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.sys.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ly.po.UserInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="id_car" jdbcType="VARCHAR" property="idCar" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="pic_icon" jdbcType="VARCHAR" property="picIcon" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="nations" jdbcType="VARCHAR" property="nations" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+    <result column="weight" jdbcType="VARCHAR" property="weight" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="graduate" jdbcType="VARCHAR" property="graduate" />
+    <result column="specialty" jdbcType="VARCHAR" property="specialty" />
+    <result column="graduation" jdbcType="VARCHAR" property="graduation" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, sex, age, id_car, birthday, pic_icon, tel, nations, height, weight, education, 
+    graduate, specialty, graduation, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ly.po.UserInfo" useGeneratedKeys="true">
+    insert into user_info (name, sex, age, 
+      id_car, birthday, pic_icon, 
+      tel, nations, height, 
+      weight, education, graduate, 
+      specialty, graduation, status
+      )
+    values (#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{idCar,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{picIcon,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{nations,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{graduate,jdbcType=VARCHAR}, 
+      #{specialty,jdbcType=VARCHAR}, #{graduation,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ly.po.UserInfo" useGeneratedKeys="true">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="idCar != null">
+        id_car,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="picIcon != null">
+        pic_icon,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="nations != null">
+        nations,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="graduate != null">
+        graduate,
+      </if>
+      <if test="specialty != null">
+        specialty,
+      </if>
+      <if test="graduation != null">
+        graduation,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="idCar != null">
+        #{idCar,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="picIcon != null">
+        #{picIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="nations != null">
+        #{nations,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="graduate != null">
+        #{graduate,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="graduation != null">
+        #{graduation,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ly.po.UserInfo">
+    update user_info
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="idCar != null">
+        id_car = #{idCar,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="picIcon != null">
+        pic_icon = #{picIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="nations != null">
+        nations = #{nations,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="graduate != null">
+        graduate = #{graduate,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        specialty = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="graduation != null">
+        graduation = #{graduation,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ly.po.UserInfo">
+    update user_info
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      id_car = #{idCar,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      pic_icon = #{picIcon,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      nations = #{nations,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      graduate = #{graduate,jdbcType=VARCHAR},
+      specialty = #{specialty,jdbcType=VARCHAR},
+      graduation = #{graduation,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
