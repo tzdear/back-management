@@ -74,7 +74,7 @@ var parentLi = function(li){
 			$(liP).addClass("open");
 			$(liP).addClass("active");
 			var liPa = $(liP).children().first();
-			$(liPa).append("<span class='select'></span>");
+			$(liPa).append("<span class='selected'></span>");
 //			$(liPa).children().find(".arrow").addClass("open");
 			$(liPa).children().each(function(){
 				if($(this).hasClass("arrow")){

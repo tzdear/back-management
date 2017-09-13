@@ -22,7 +22,8 @@ var App = function() {
     else {
     	doMainUrl =  window.location.protocol + '//' + window.location.host + '/' + webName;
     }
-    
+    doMainUrl = $("#doMainURL").val();
+    doMainUrl = doMainUrl.substring(0, doMainUrl.length-1);
     assetsPath = doMainUrl + "/theme/assets/";
     
     var globalImgPath = 'global/img/';
@@ -1080,7 +1081,7 @@ var App = function() {
 			  bootbox.alert("不好意思 出现了 错误 ");
 			}
         },
-        domain:function(){
+        domain:function(){ 
             return doMainUrl;
         }
     };

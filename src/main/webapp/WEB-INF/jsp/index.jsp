@@ -4,7 +4,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE HTML>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -44,6 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
 
   <body class=" login">
+  <input type="hidden" value="<%=basePath %>" id="doMainURL"/>
      <!-- BEGIN LOGO -->
      <div class="logo">
          <a href="index.html">
@@ -142,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <script src="<%=basePath %>theme/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
      <!-- END PAGE LEVEL PLUGINS -->
      <!-- BEGIN THEME GLOBAL SCRIPTS -->
-     <script src="<%=basePath %>theme/assets/global/scripts/app.js" type="text/javascript"></script>
+     <script src="<%=basePath %>theme/assets/global/scripts/app.js?a=111" type="text/javascript"></script>
      <!-- END THEME GLOBAL SCRIPTS -->
      <!-- BEGIN PAGE LEVEL SCRIPTS -->
      <script src="<%=basePath %>theme/assets/pages/scripts/login.js" type="text/javascript"></script>

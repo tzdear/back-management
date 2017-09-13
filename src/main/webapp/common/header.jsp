@@ -5,6 +5,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <div class="page-header navbar navbar-fixed-top">
+<input type="hidden" value="<%=basePath %>" id="doMainURL"/>
      <!-- BEGIN HEADER INNER -->
      <div class="page-header-inner ">
          <!-- BEGIN LOGO -->

@@ -6,15 +6,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 request.setAttribute("basePath", basePath);
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
 <html lang="en">
   <head>
         <title>后台管理</title>
-         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="#1 selling multi-purpose bootstrap admin theme sold in themeforest marketplace packed with angularjs, material design, rtl support with over thausands of templates and ui elements and plugins to power any type of web applications including saas and admin dashboards. Preview page of Theme #1 for basic datatable samples"
             name="description" />
         <meta content="" name="author" />
@@ -39,7 +37,8 @@ request.setAttribute("basePath", basePath);
         <link href="<%=basePath %>theme/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="<%=basePath %>theme/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="favicon.ico" /> 
+        <link rel="icon" type="image/png" href="<%=basePath %>theme/assets/global/img/favicon32-32.ico" sizes="32x32" />
+		<link rel="icon" type="image/png" href="<%=basePath %>theme/assets/global/img/favicon16-16.ico" sizes="16x16" />
         <style type="text/css">
         .page-header.navbar .menu-toggler.sidebar-toggler{
         	margin:30px 0 0

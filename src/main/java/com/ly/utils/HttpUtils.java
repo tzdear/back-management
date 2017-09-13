@@ -9,6 +9,8 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -21,6 +23,47 @@ import javax.net.ssl.HttpsURLConnection;
 */
 public class HttpUtils {
 
+	public static Map<String, Object> post(String url,String content){
+		System.out.println("url:>"+url);
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			URL uri = new URL(url);  
+			URLConnection rulConnection = uri.openConnection();
+			HttpURLConnection httpUrlConnection = (HttpURLConnection) rulConnection;
+			httpUrlConnection.setDoOutput(true);
+			httpUrlConnection.setDoInput(true);
+			httpUrlConnection.setUseCaches(false); 
+			httpUrlConnection.setRequestMethod("POST");
+			DataOutputStream  dataOutputStream = new DataOutputStream(httpUrlConnection.getOutputStream());
+//			dataOutputStream.write("".getBytes("utf-8"));
+			dataOutputStream.flush();
+			dataOutputStream.close();
+			StringBuffer stringBuffer = new StringBuffer();
+			InputStream inputStream = httpUrlConnection.getInputStream();
+			BufferedReader  bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+			int code = httpUrlConnection.getResponseCode(); 
+            if (HttpsURLConnection.HTTP_OK == code){
+            	String temp = bufferedReader.readLine(); 
+                /*连接成一个字符串*/ 
+                while (temp != null) { 
+                	stringBuffer.append(temp);
+                    temp = bufferedReader.readLine(); 
+ 	            }
+                map.put("code",code);
+                map.put("mes", stringBuffer);
+            }else {
+            	map.put("code",code);
+                map.put("mes", httpUrlConnection.getResponseMessage());
+			}
+		} catch (Exception e) {
+			map.put("code", 1);
+			map.put("mes", "http请求 出错了 ");
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	
 	public static void post(String ip,Integer sort){
 		try {
 			URL url = new URL("http://api.img_ap.dwnews.com/enterprise/index.php/Home/Index/usageCounter");   
@@ -54,11 +97,11 @@ public class HttpUtils {
 			  
 			 // 连接，从上述第2条中url.openConnection()至此的配置必须要在connect之前完成，   
 			 DataOutputStream  dataOutputStream = new DataOutputStream(httpUrlConnection.getOutputStream());
-	           dataOutputStream.write("info=[{\"LinkUrl \":\"http://news.dwnews.com/topic/big5/10-50000064.html\",\"ImgId\":344555,\"ArticleId\":\"\",\"ImgUrl\":\"http://pic6.dwnews.net/20170727/7a9c450e846559b6485639c97e7c018a_w.jpg\",\"email\":\"linyan\",\"ts\":1501061720}]".getBytes("utf-8"));
+	           dataOutputStream.write("".getBytes("utf-8"));
 	           dataOutputStream.flush();
 	           dataOutputStream.close();
 	           StringBuffer stringBuffer = new StringBuffer();
-	   			InputStream inputStream = httpUrlConnection.getInputStream();
+	   		InputStream inputStream = httpUrlConnection.getInputStream();
 	               BufferedReader  bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 	               int code = httpUrlConnection.getResponseCode(); 
 	               System.err.println(code);
